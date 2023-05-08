@@ -5,3 +5,8 @@ body {
 .rounded-pill {
   background-color: rgb(235, 235, 48);
 }
+
+button{
+  background-color: aqua;
+  border: 2px solid darkmagenta;
+}

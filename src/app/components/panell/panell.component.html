@@ -1,48 +1,58 @@
-<form class="container d-flex flex-column justify-content-center p-3" [formGroup]="panellFormulari"
+<form class="container d-flex flex-column justify-content-center p-3" [formGroup]="pagesWebForm"
   (ngSubmit)="onSubmit()">
 
   <div class="containerOptions">
 
     <div class="containerButtons text-center">
       <button class="buttonsOptionsWeb btn btn-danger" (click)="decreaseByPage(-1)"> -1 </button>
-      <label class="form-check-label"> Number of pages:
+      <label class="form-check-label"> Numero páginas
         <!--   (keyup.enter)="emitValueIdiomas( txtInput.value)" -->
-        <input type="number" class="form-control w-25 text-center" style="appearance: textfield;"
+        <input matInput type="number" class="form-control w-25 text-center" style="appearance: textfield;"
 
-        [placeholder]="this.theCounterPag" [(ngModel)]="theCounterPag" formControlName="numPagesCtrl" (change)="onSubmit()"
+        [placeholder]="this.theCounterPag" [(ngModel)]="theCounterPag" required formControlName="numPagesCtrl" (change)="onSubmit()"
         #txtInput>
 
+
+        <!-- DIVISION DU VALIDATION MESSAGE -->
+
+
+
       </label>
-      <!--(change)="onPropagar()-->
       <button class="buttonsOptionsWeb btn btn-danger" (click)="increaseByPage(+1)"> +1 </button>
       <app-modal></app-modal>
-    </div>
-
-<!--     <div>
-      <span class="form-text text-danger text-center" > !-- *ngIf="!showValidationMsg('numPagesCtrl') && faltenDades" --
+      <br>
+      <span *ngIf="quantityPag <= 0" class="form-text text-danger text-center" >
         Please chose number of pages
       </span>
+
     </div>
+
+
 
     <!--------------------------- INCREMENT BUTTON --------------------------->
 
     <div class="containerButtons text-center">
       <button class="buttonsOptionsWeb btn btn-danger" (click)="decreaseByLanguage(-1)"> -1 </button>
-      <label class="form-check-label"> Number of languages
+      <label class="form-check-label"> Numero idiomas
         <!--    (keyup.enter)="emitValueNumPag( txtInput.value)" -->
-        <input type="number" class="form-control w-25 text-center" style="appearance: textfield;"
-          [placeholder]="theCounterIdiomas" [(ngModel)]="theCounterIdiomas" formControlName="numIdiomasCtrl" ((change))="onSubmit()">
+        <input matInput type="number" class="form-control w-25 text-center" style="appearance: textfield;"
+        [placeholder]="theCounterIdiomas" [(ngModel)]="theCounterIdiomas" required formControlName="numIdiomasCtrl" ((change))="onSubmit()">
 
       </label>
       <button class="buttonsOptionsWeb btn btn-danger" (click)="increaseByLanguage(+1)"> +1 </button>
       <app-modal></app-modal>
+
+      <!-- SPAN DU VALIDATION MESSAGE -->
+        <br><span *ngIf="quantityLang <= 0" class="form-text text-danger text-center" >
+          Please chose number of languages (at least one)
+        </span>
+
     </div>
   </div>
 
     <br>
 
-
-    <p> {{ emit_detailPagWEB()}} </p> <!-- Let exploiter le total des services web -->
+    <p> {{ emit_detailPagWEB()}} </p>
 
 
 </form>

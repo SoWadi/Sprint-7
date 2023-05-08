@@ -81,7 +81,7 @@ export class DataService {
     this.totalWebPages = _quantityLang * _quantityPages * 30;
 
    // this.totalWebPages = (this.quantityPages * this.quantityLang) * 30
-    console.log("this.totalWebPages - ", this.totalWebPages);
+    //console.log("this.totalWebPages - ", this.totalWebPages);
     return this.totalWebPages
 
   }
@@ -161,6 +161,7 @@ Service_budgetName(val:string){
 Service_calcTotalPreu = ():number =>{
 
   this.varS_totalChexboxes = this.priceGAds + this.pricePagWeb + this.priceSeo;
+
   return this.varS_totalChexboxes + this.totalWebPages;
 }
 
@@ -172,7 +173,7 @@ Service_createObjetBudget (){
     //TODO: AJOUTER LES PAGES A L'OBJET AINSI QUE LES TOTAUX
     Total: this.varS_totalChexboxes + this.totalWebPages
   }
-console.log("newBudget - ", newBudget);
+
 return newBudget
 }
 
@@ -180,7 +181,6 @@ return newBudget
 
 get getTotalService(){
 //this.getBoolDesCheckboxes()
-console.log("METODE get totalService dans dataService = this.Service_calcTotalPreu(): ", this.Service_calcTotalPreu());
   this.Service_createObjetBudget()
   return this.Service_calcTotalPreu()
 }
@@ -189,22 +189,10 @@ console.log("METODE get totalService dans dataService = this.Service_calcTotalPr
 get iscHecked () {
   return this.isPageWebCheck }
 
-//METHODE SERVICE POUR CRÉER NEW BUDGWRT LIST
-/* metodePadre_saveDetailBudget = () => {
-  this.dataS.saveDetailBudget();
-  this.dataS.arrayPresus;
-  let newBudget:Budget = {
-    PagesWeb: this.pricePagWeb,
-    GADS: this.priceGAds,
-    Seo: this.priceSeo,
-    Total: this.precioActualizado
-  };
+  // -------------------------- TEST: console log des bool des checkboxes --------------------------
 
 
-  this.budgetList.push(this.varNewBudget);
-  console.log("this.budgetList - ", this.budgetList);
+/* updatePrice_ferherr( budget :interfaceBudget){
 
-}
- */
-
+} */
 }

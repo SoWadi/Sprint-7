@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/data.service';
 
+import { interfaceBudget } from 'src/app/interfaces/servicePageWeb.interface';
+
 @Component({
   selector: 'app-panell',
   templateUrl: './panell.component.html',
@@ -9,58 +11,64 @@ import { DataService } from 'src/app/data.service';
 })
 export class PanellComponent implements OnInit {
 
-
-
-  //CREATION DU FORMGROUP:
-  /* public pagesWebForm :FormGroup = new FormGroup({
-    numPages: new FormControl(""),
-    numIdiomas: new FormControl(""), //nonNullable:true}Superhero siempre va ser una string
-
-  });
-   */
-
-    panellFormulari: FormGroup = this.formBuilder.group({
-      numPagesCtrl: [0, [Validators.required, Validators.min(1)]],
-      numIdiomasCtrl: [0, [Validators.required, Validators.min(1)]],
-    });
-
-
-  // Importem del component pare el valor "faltenDades" per mostrar o no missatge d'error al panell
-  @Input('') faltenDades!: boolean;
-
-  // Missatge error a l'HTML si no passa validació
-  showValidationMsg(inputUser: string) {
-    console.log("inputUser - ",  inputUser);
-    return this.panellFormulari.controls[inputUser].errors;
+  constructor(
+    public dataS : DataService,
+    public formBuilder: FormBuilder){
   }
 
+  //CREATION DU FORMGROUP:
+  public pagesWebForm :FormGroup = new FormGroup({
+    numPagesCtrl: new FormControl(0, Validators.required),
+    numIdiomasCtrl: new FormControl(0), //nonNullable:true}Superhero siempre va ser una string
+
+  });
+
+  public formIsValid: boolean = false;
 
   public formulaire!: FormGroup;
-  public detailWEBEUH: any;
   public totalDetailServiceWeb!: number;
 
   public quantityLang : number = 0;
   public quantityPag  : number = 0;
 
-  public donnees: any = {};
+  public donneesFormulaireServiceWeb: any = {};
 
   public detailPagWEB:number = 0
   public detailPagWEB_2:number = 0
 
   public checkValid: boolean = false;
 
-  constructor(
-    public dataS : DataService,
-    public formBuilder: FormBuilder){
+  get currentBudget():interfaceBudget {
+    const budgetWeb = this.pagesWebForm.value as interfaceBudget;
+    console.log("budget - ",  budgetWeb);
+    console.table({
+      //formIsValid: this.pagesWebForm.valid,
+      NombdeDePag: this.pagesWebForm.value.numPagesCtrl,
+      NombreDeLang: this.pagesWebForm.value.numIdiomasCtrl,
+    });
+
+    return budgetWeb
   }
 
 
 
-  // Mètode que retorna el Total Opcions Web utilitzant el servei
+  // Missatge error a l'HTML si no passa validació
+  showValidationMsg(inputUser: string) {
+    return this.pagesWebForm.controls[inputUser].errors;
+  }
+
+
+
+
+
+
+// METHODE pour recevoir ET TRAITER les données reçues dans le FORM
+//TODO : find a way to extract them
   totalWebOpcions() {
-    this.quantityPag = +this.panellFormulari.get('numPagesCtrl')?.value;
-    this.quantityLang = +this.panellFormulari.get('numIdiomasCtrl')?.value;
-    //this.cridarServeiOpcionsWeb();
+    this.quantityPag = +this.pagesWebForm.get('numPagesCtrl')?.value;
+
+    this.quantityLang = +this.pagesWebForm.get('numIdiomasCtrl')?.value;
+
 
   }
 
@@ -71,68 +79,47 @@ export class PanellComponent implements OnInit {
 
 
 
-
-/*   //get valeur du formControl*NAME*
-get numPagesValue():number{
-  this.quantityPag = Number(this.panellFormulari.get("numPages")?.value);
-
-  console.log("this.quantityLang  - ", this.quantityPag);
-
-  return this.quantityPag
-} */
-
-// METHODE pour recevoir ET TRAITER les données reçues dans le FORM
-//TODO : find a way to extract them
-
 onSubmit() {
 
-  this.quantityPag = Number(this.panellFormulari.get("numPagesCtrl")?.value);
+if (this.pagesWebForm.validator) {console.log("this.pagesWebForm.valueChanges  -  ", this.pagesWebForm.valueChanges.forEach( e => console.log(e)));};
+if (this.currentBudget.web) {
+
+  console.log('this.currentBudget.web: ', this.currentBudget.web);
+}
+
+  //this.cridarServeiOpcionsWeb()
+  this.quantityPag = Number(this.pagesWebForm.get("numPagesCtrl")?.value);
   console.log("this.quantityPag   - ", this.quantityPag);
 
-  this.quantityLang = Number(this.panellFormulari.get('numIdiomasCtrl')?.value);
+  this.quantityLang = Number(this.pagesWebForm.get('numIdiomasCtrl')?.value);
 
-  this.donnees ={
-  quantityLang : Number(this.panellFormulari.value.numIdiomas),
-  quantityPag : Number(this.panellFormulari.value.numPages),
-  totalDetailServiceWeb : Number(this.panellFormulari.value.numIdiomas) * Number(this.panellFormulari.value.numPages) * 30
+  this.donneesFormulaireServiceWeb ={
+  quantityLang : Number(this.pagesWebForm.value.numIdiomasCtrl),
+  quantityPag : Number(this.pagesWebForm.value.numPagesCtrl),
+  totalDetailServiceWeb : Number(this.pagesWebForm.value.numIdiomasCtrl) * Number(this.pagesWebForm.value.numPagesCtrl) * 30
 };
 
-console.log("this.donnees  - ", this.donnees);
-/*
- this.dataS.envoyerDonnees(this.donnees)
-.subscribe(() => {
-  // gérer la réponse du service
-  console.log("donnees.exploiteNumIdiomas: ");
-}) */
+console.table( this.donneesFormulaireServiceWeb);
 
-  //console.log("totalDetailServiceWeb:",  this.totalDetailServiceWeb); ==> devuelve undefined
-  //console.log(this.donnees.totalDetailServiceWeb);
-this.detailPagWEB_2 = this.donnees.totalDetailServiceWeb
-console.log("this.detailPagWEB_2  - ", this.detailPagWEB_2);
 
-console.log('this.detailPagWEBEUH_2: ', this.detailPagWEB_2);
   return this.detailPagWEB_2
 }
 
   // Enviem Total Opcions Web & Validacio del Form al component pare "Home" amb @Output
+
   @Output()
   output_detailPagWeb = new EventEmitter<number>();
   onPropagar( ) {
     return this.output_detailPagWeb.emit(this.detailPagWEB);
   }
 
-// GET SOMME SERVICES WEB via SERVICE DataS
+
   sumDetailtoOutput = () => {
-
-     //let getTheService_totalWebPagesResult = this.dataS.Service_totalWebPagesResult(this.counterIdiomas, this.counterPaginas);
-
-     //this.theCounterPag += this.counterPaginas;
-
+     //this.counterIdiomas * this.counterPaginas * 30
      return this.dataS.Service_totalWebPagesResult(this.counterIdiomas, this.counterPaginas)
   }
 
-
-
+  // ****************** GETTER & SETTERS for the PLACEHOLDER  ******************
   private _counterPaginas!: number;
   private _counterIdiomas!: number;
 
@@ -160,7 +147,6 @@ emit_detailPagWEB = ()  => {
 
 // --------------- https://ultimatecourses.com/blog/component-events-event-emitter-output-angular-2
 
-
 public counterPaginas: number = 0;
 public counterIdiomas: number = 0;
 
@@ -180,7 +166,7 @@ increaseByPage(value: number):void {
 decreaseByLanguage(value: number):void {
 
   this.counterIdiomas += value;
-  this.quantityLang = this.counterIdiomas;
+  this.quantityLang += this.counterIdiomas;
  }
 
  increaseByLanguage(value: number):void {

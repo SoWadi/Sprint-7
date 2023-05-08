@@ -27,12 +27,12 @@ export class HomeComponent {
   public precioActualizado:number = 0
   //public varNewBudget: Budget[] = []
 
-  public newBudget:Budget={
+ /*  public newBudget:Budget={
     PagesWeb: 0,
     GADS: 0,
     Seo: 0,
     Total: 0
-  } ;
+  } ; */
 public varNewBudget:Budget={
   PagesWeb: 0,
   GADS: 0,
@@ -43,7 +43,7 @@ public varNewBudget:Budget={
 
 
 budgetList :Budget[] = []
-budgetList2 :Budget[] = []
+
 //TODO : REMPLCACE par appel service - Service_emitcheckPagWeb
 Component_emitcheckPagWeb(e: any){
   this.dataS.Service_emitcheckPagWeb(e);
@@ -67,7 +67,7 @@ Component_emitcheckGAds(e: any){
   //this.dataS.Service_calcTotalPreu()
 }
 
-//TODO : REMPLCACE par appel service - Service_budgetName
+//TODO : REMPLCACE par appel service - Service_emitcheckGAds
 Component_emitBudgetName(e: string){
   let x_ = this.dataS.Service_budgetName(e);
   console.log("x_  - ", x_);
@@ -95,7 +95,11 @@ methodePadre_onTotalWebServ(valor: number) {
   //this.Component_calcTotalPreu()
   this.detailWebServ = valor;
   this.totalPagWebServ += this.detailWebServ;
-
+  console.log("valor: ", valor + this.totalPagWebServ);
+  console.log("detailPagesWebPresu dans component 'new-page2'", this.totalPagWebServ);
+  console.log("totalPreu dans component 'new-page2'", this.totalPreu);
+  //this.totalPreu = this.dataS.Service_calcTotalPreu()
+  console.log("this.detailPagesWebPresu  -  ",  this.totalPagWebServ);
   return this.totalPreu
 
 }
@@ -106,7 +110,6 @@ public retrieveDetailPageWeb: number = 0;
 
 metodePadre_retrieveDetailPageWeb =  (retrieveDetailPageWeb_p: number) => {
 
-  console.log(retrieveDetailPageWeb_p);
   this.retrieveDetailPageWeb = retrieveDetailPageWeb_p;
   this.retrieveDetailPageWeb
   return this.retrieveDetailPageWeb
@@ -118,7 +121,6 @@ metodePadre_retrieveDetailPageWeb =  (retrieveDetailPageWeb_p: number) => {
 onTotalPagWebServ(valor: number) {
   this.totalPagWebServ = valor;
   this.totalPagWebServ = this.totalServicios + this.totalPagWebServ;
-  console.log(this.totalPagWebServ, this.totalServicios );
   return this.totalPagWebServ
 }
 
@@ -135,8 +137,8 @@ countChange(event:number) {
 
 // VALEUR pour afficher le total en bas de la div
 totalPresupuesto = ():number =>{
-  this.precioActualizado = this.dataS.Service_calcTotalPreu();
-  console.log("precioActualizado - ", this.precioActualizado);
+  this.precioActualizado =  this.dataS.Service_calcTotalPreu();
+
   return this.precioActualizado
 
 }
@@ -154,18 +156,16 @@ metodePadre_saveDetailBudget = () => {
 
 
   this.budgetList.push(this.varNewBudget);
-  console.log("this.budgetList - ", this.budgetList);
 
 }
 
 // Create Objet Budget
 padre_createObjetBudget():Budget{
-console.log("this.dataS.Service_createObjetBudget() - ", this.dataS.Service_createObjetBudget());
+
   this.varNewBudget = this.dataS.Service_createObjetBudget();
 
   // ACTUALIZE PRECIO TOTAL
-this.varNewBudget.Total += this.retrieveDetailPageWeb;
-console.log("this.varNewBudget - ", this.varNewBudget);
+this.varNewBudget.Total;
   return this.varNewBudget;
 
 }
