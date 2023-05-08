@@ -1,0 +1,34 @@
+
+.contenant {
+  width: 300px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  width: 50% !important;
+  background-color: rgb(200, 200, 236);
+  margin: auto;
+}
+
+.buttonsOptionsWeb {
+
+  background-color: rgb(5, 18, 29);
+  border: none  ;
+}
+
+.buttonsOptionsWeb:hover {
+  background-color: rgba(15, 44, 69, 0.459)
+}
+
+/* .containerOptions{
+  border: 2px solid slateblue ;
+  height: 300px;
+} */
+.containerButtons{
+  height: 100px;
+}
+
+

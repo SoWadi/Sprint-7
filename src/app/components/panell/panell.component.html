@@ -1,0 +1,59 @@
+<form class="container d-flex flex-column justify-content-center p-3" [formGroup]="panellFormulari"
+  (ngSubmit)="onSubmit()">
+
+  <div class="containerOptions">
+
+    <div class="containerButtons text-center">
+      <button class="buttonsOptionsWeb btn btn-danger" (click)="decreaseByPage(-1)"> -1 </button>
+      <label class="form-check-label"> Numero páginas
+        <!--   (keyup.enter)="emitValueIdiomas( txtInput.value)" -->
+        <input type="number" class="form-control w-25 text-center" style="appearance: textfield;"
+
+        [placeholder]="this.counterPaginas" formControlName="numPagesCtrl" (change)="onSubmit()"
+        #txtInput>
+        {{counterPaginas}}
+      </label>
+      <button class="buttonsOptionsWeb btn btn-danger" (click)="increaseByPage(+1)"> +1 </button>
+      <app-modal></app-modal>
+    </div>
+
+<!--     <div>
+      <span class="form-text text-danger text-center" > !-- *ngIf="!showValidationMsg('numPagesCtrl') && faltenDades" --
+        Please chose number of pages
+      </span>
+    </div>
+
+    <!--------------------------- INCREMENT BUTTON --------------------------->
+
+    <div class="containerButtons text-center">
+      <button class="buttonsOptionsWeb btn btn-danger" (click)="decreaseByLanguage(-1)"> -1 </button>
+      <label class="form-check-label"> Numero idiomas
+        <!--    (keyup.enter)="emitValueNumPag( txtInput.value)" -->
+        <input type="number" class="form-control w-25 text-center" style="appearance: textfield;"
+          [placeholder]="counterIdiomas" formControlName="numIdiomasCtrl" ((change))="onSubmit()">
+          {{counterIdiomas}}
+      </label>
+      <button class="buttonsOptionsWeb btn btn-danger" (click)="increaseByLanguage(+1)"> +1 </button>
+      <app-modal></app-modal>
+    </div>
+  </div>
+
+    <br>
+
+    <p> {{ emit_detailPagWEB()}} </p>
+
+
+</form>
+
+
+
+
+<!-- ********** TUTO YT ************
+  <label for="item-input">Add an item:</label>
+<input type="text" id="item-input" #newItem>
+<button type="button" (click)="ComponentPannell_addNewItem(+newItem.value)">Add to parent's list</button>
+
+<p> {{  newItem.value  }} </p>
+
+
+ -->

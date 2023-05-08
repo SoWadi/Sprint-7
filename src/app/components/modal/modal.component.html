@@ -1,0 +1,24 @@
+<!-- MODAL ICON -->
+<span
+  type="button"
+  (click)="modal.open(infoModal)"
+  class="btn bi bi-info-circle text-light">
+  <i class="fa fa-info-circle" aria-hidden="true"></i>
+
+</span>
+
+<!-- Modal -->
+<ng-template #infoModal let-modal>
+  <div class="modal-header bg-secondary text-dark">
+    <h4 class="modal-title">Information</h4>
+  </div>
+  <div class="modal-body text-dark">
+
+    You have to choose the number of pages and languages you nee for your application (min.1).
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close()">
+      Ok
+    </button>
+  </div>
+</ng-template>
