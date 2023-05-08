@@ -9,9 +9,9 @@
         <!--   (keyup.enter)="emitValueIdiomas( txtInput.value)" -->
         <input type="number" class="form-control w-25 text-center" style="appearance: textfield;"
 
-        [placeholder]="this.counterPaginas" formControlName="numPagesCtrl" (change)="onSubmit()"
+        [placeholder]="this.theCounterPag" [(ngModel)]="theCounterPag" formControlName="numPagesCtrl" (change)="onSubmit()"
         #txtInput>
-        {{counterPaginas}}
+
       </label>
       <button class="buttonsOptionsWeb btn btn-danger" (click)="increaseByPage(+1)"> +1 </button>
       <app-modal></app-modal>
@@ -30,8 +30,8 @@
       <label class="form-check-label"> Numero idiomas
         <!--    (keyup.enter)="emitValueNumPag( txtInput.value)" -->
         <input type="number" class="form-control w-25 text-center" style="appearance: textfield;"
-          [placeholder]="counterIdiomas" formControlName="numIdiomasCtrl" ((change))="onSubmit()">
-          {{counterIdiomas}}
+        [placeholder]="theCounterIdiomas" [(ngModel)]="theCounterIdiomas" formControlName="numIdiomasCtrl" ((change))="onSubmit()">
+
       </label>
       <button class="buttonsOptionsWeb btn btn-danger" (click)="increaseByLanguage(+1)"> +1 </button>
       <app-modal></app-modal>

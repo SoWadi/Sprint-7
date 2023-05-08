@@ -149,6 +149,24 @@ console.log('this.detailPagWEBEUH_2: ', this.detailPagWEB_2);
      return this.dataS.Service_totalWebPagesResult(this.counterIdiomas, this.counterPaginas)
   }
 
+  private _counterPaginas!: number;
+  private _counterIdiomas!: number;
+
+
+  get theCounterPag(){
+    return this.counterPaginas
+  }
+  set theCounterPag(counterPaginas : number){
+     this._counterPaginas = counterPaginas;
+      console.log("this._counterPaginas - ", this._counterPaginas);
+  }
+  get theCounterIdiomas(){
+    return this.counterIdiomas
+  }
+  set theCounterIdiomas(counterIdiomas : number){
+     this._counterIdiomas = counterIdiomas;
+      console.log("this._counterIdiomas - ", this._counterIdiomas);
+  }
 
 
 @Output() detailPagWEB_Emitter : EventEmitter<any> = new EventEmitter()
