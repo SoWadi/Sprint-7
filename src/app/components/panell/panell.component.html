@@ -5,7 +5,7 @@
 
     <div class="containerButtons text-center">
       <button class="buttonsOptionsWeb btn btn-danger" (click)="decreaseByPage(-1)"> -1 </button>
-      <label class="form-check-label"> Numero páginas
+      <label class="form-check-label"> Number of pages:
         <!--   (keyup.enter)="emitValueIdiomas( txtInput.value)" -->
         <input type="number" class="form-control w-25 text-center" style="appearance: textfield;"
 
@@ -28,7 +28,7 @@
 
     <div class="containerButtons text-center">
       <button class="buttonsOptionsWeb btn btn-danger" (click)="decreaseByLanguage(-1)"> -1 </button>
-      <label class="form-check-label"> Numero idiomas
+      <label class="form-check-label"> Number of languages
         <!--    (keyup.enter)="emitValueNumPag( txtInput.value)" -->
         <input type="number" class="form-control w-25 text-center" style="appearance: textfield;"
           [placeholder]="theCounterIdiomas" [(ngModel)]="theCounterIdiomas" formControlName="numIdiomasCtrl" ((change))="onSubmit()">

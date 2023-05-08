@@ -7,7 +7,7 @@
 
   <!--  PAGES WEB 500€ CHECKBOX: -->
   <form class="form-check needs-validation mt-5 ">
-    <label class="form-check-label"> Una pàgina web (500€)
+    <label class="form-check-label"> Web page (500€)
       <input type="checkbox" class="form-check-input" (change)="Component_emitcheckPagWeb($event)" value="500" />
     </label>
     <br />
@@ -27,13 +27,13 @@
     </ng-template>
 
     <!--  PAGES WEB 500€ CHECKBOX: -->
-    <label class="form-check-label">Una consultoria SEO (300€)
+    <label class="form-check-label"> SEO consulting (300€)
       <input type="checkbox" class="form-check-input" (change)="Component_emitcheckSeo($event)" value=300 />
     </label>
     <br />
 
     <!--  GOOGLE ADS 200€ CHECKBOX:-->
-    <label class="form-check-label"> Una campanya de Google Ads (200€)
+    <label class="form-check-label"> Google Ads campaign (200€)
       <input type="checkbox" class="form-check-input" (change)="Component_emitcheckGAds($event)" value="pub" />
     </label>
     <br/>
@@ -41,20 +41,20 @@
               <!-- -------------------------------- -->       <hr>      <!-- -------------------------------- -->
 
     <!--     <p> Total Price: {{ this.retrieveDetailPageWeb +   this.dataS.Service_calcTotalPreu()}} </p> -->
-    <h5> <strong> TOTAL: (totalPresupuesto()) {{ totalPresupuesto() }} € </strong></h5>
-    <h5> <strong> TOTAL (dataS.newBudget):  {{this.dataS.Service_calcTotalPreu()}} € </strong></h5>
+    <!-- <h5> <strong> TOTAL: (totalPresupuesto()) {{ totalPresupuesto() }} € </strong></h5> -->
+    <h5> <strong> TOTAL :  {{this.dataS.Service_calcTotalPreu()}} € </strong></h5>
 
 
 
     <br>
-    <button (click)="metodePadre_saveDetailBudget()">metodePadre_saveDetailBudget()</button>
+    <button class="btn btn-success" (click)="metodePadre_saveDetailBudget()">Save budget </button>
 
 <div>
     <!-- ---------------------------------------------   INSERER NOM CLIENT    --------------------------------------------------- -->
-    <!-- TODO:  reprendre exemple FerHerrera avec la reference locale #txtInput -->
+    <!-- TODO:  reprendre exemple FerHerrera avec la reference locale #txtInput
     <label class="form-check-label"> Enter budget name:
       <input type="text" class="form-text-input" (change)="Component_emitcheckGAds($event)" value="pub" />
-    </label>
+    </label>  -->
     <!-- ---------------------------------------------   INSERER NOM BUDGET   --------------------------------------------------- -->
   </div>
 
