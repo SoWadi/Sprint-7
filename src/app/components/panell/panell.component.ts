@@ -26,7 +26,7 @@ export class PanellComponent implements OnInit {
 
 
   // Importem del component pare el valor "faltenDades" per mostrar o no missatge d'error al panell
-  @Input('checkSub') faltenDades!: boolean;
+  @Input('') faltenDades!: boolean;
 
   // Missatge error a l'HTML si no passa validació
   showValidationMsg(inputUser: string) {
@@ -48,6 +48,7 @@ export class PanellComponent implements OnInit {
   public detailPagWEB_2:number = 0
 
   public checkValid: boolean = false;
+
   constructor(
     public dataS : DataService,
     public formBuilder: FormBuilder){
@@ -58,32 +59,15 @@ export class PanellComponent implements OnInit {
   // Mètode que retorna el Total Opcions Web utilitzant el servei
   totalWebOpcions() {
     this.quantityPag = +this.panellFormulari.get('numPagesCtrl')?.value;
-
     this.quantityLang = +this.panellFormulari.get('numIdiomasCtrl')?.value;
     //this.cridarServeiOpcionsWeb();
 
   }
 
 
-/*   cridarServeiOpcionsWeb() {
-    if (this.quantityPag < 1 || this.quantityLang < 1) {
-
-      //this.totalDetailServiceWeb = 0;
-      this.checkValid = false;
-    } else {
-      this.totalDetailServiceWeb = this.dataS.Service_totalWebPagesResult(
-        this.quantityPag,
-        this.quantityLang
-      );
-      this.checkValid = true;
-    }
-    console.log('Checkvalid', this.checkValid);
-  } */
-
   ngOnInit(): void {
 
   }
-
 
 
 
@@ -102,7 +86,6 @@ get numPagesValue():number{
 
 onSubmit() {
 
-  //this.cridarServeiOpcionsWeb()
   this.quantityPag = Number(this.panellFormulari.get("numPagesCtrl")?.value);
   console.log("this.quantityPag   - ", this.quantityPag);
 
@@ -132,22 +115,23 @@ console.log('this.detailPagWEBEUH_2: ', this.detailPagWEB_2);
 }
 
   // Enviem Total Opcions Web & Validacio del Form al component pare "Home" amb @Output
-
   @Output()
   output_detailPagWeb = new EventEmitter<number>();
   onPropagar( ) {
     return this.output_detailPagWeb.emit(this.detailPagWEB);
   }
 
-
+// GET SOMME SERVICES WEB via SERVICE DataS
   sumDetailtoOutput = () => {
-     //this.counterIdiomas * this.counterPaginas * 30
-     console.log("this.quantityLang -  ", this.quantityLang);
-     console.log("this.counterIdiomas -  ", this.counterIdiomas);
-     console.log("this.quantityPag -  ", this.quantityPag);
-     console.log("this.counterPaginas -  ", this.counterPaginas);
+
+     //let getTheService_totalWebPagesResult = this.dataS.Service_totalWebPagesResult(this.counterIdiomas, this.counterPaginas);
+
+     //this.theCounterPag += this.counterPaginas;
+
      return this.dataS.Service_totalWebPagesResult(this.counterIdiomas, this.counterPaginas)
   }
+
+
 
   private _counterPaginas!: number;
   private _counterIdiomas!: number;
@@ -176,14 +160,7 @@ emit_detailPagWEB = ()  => {
 
 // --------------- https://ultimatecourses.com/blog/component-events-event-emitter-output-angular-2
 
-public increment_detailPagWEBEUH = this.detailPagWEB   + 1;
-@Input()
-count: number = 0;
 
-@Output()
-//change: EventEmitter<number> = new EventEmitter<number>();
-
-/*  */
 public counterPaginas: number = 0;
 public counterIdiomas: number = 0;
 

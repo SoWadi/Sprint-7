@@ -15,6 +15,7 @@ import { DataService } from './data.service';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { ModalComponent } from './components/modal/modal.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { ModalComponent } from './components/modal/modal.component';
   exports: [
     WelcomePageComponent,
     PanellComponent,
-    HomeComponent],
+    HomeComponent
+    ],
 
   providers: [DataService],
   bootstrap: [AppComponent],

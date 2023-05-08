@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DataService } from 'src/app/data.service';
-import { Budget } from 'src/app/interfaces/interfacePresupuesto.interface';
+import { Budget } from 'src/app/interfaces/monInterface';
 
 
 @Component({
@@ -27,12 +27,12 @@ export class HomeComponent {
   public precioActualizado:number = 0
   //public varNewBudget: Budget[] = []
 
- /*  public newBudget:Budget={
+  public newBudget:Budget={
     PagesWeb: 0,
     GADS: 0,
     Seo: 0,
     Total: 0
-  } ; */
+  } ;
 public varNewBudget:Budget={
   PagesWeb: 0,
   GADS: 0,
@@ -43,7 +43,7 @@ public varNewBudget:Budget={
 
 
 budgetList :Budget[] = []
-
+budgetList2 :Budget[] = []
 //TODO : REMPLCACE par appel service - Service_emitcheckPagWeb
 Component_emitcheckPagWeb(e: any){
   this.dataS.Service_emitcheckPagWeb(e);
@@ -67,7 +67,7 @@ Component_emitcheckGAds(e: any){
   //this.dataS.Service_calcTotalPreu()
 }
 
-//TODO : REMPLCACE par appel service - Service_emitcheckGAds
+//TODO : REMPLCACE par appel service - Service_budgetName
 Component_emitBudgetName(e: string){
   let x_ = this.dataS.Service_budgetName(e);
   console.log("x_  - ", x_);
@@ -95,11 +95,7 @@ methodePadre_onTotalWebServ(valor: number) {
   //this.Component_calcTotalPreu()
   this.detailWebServ = valor;
   this.totalPagWebServ += this.detailWebServ;
-  console.log("valor: ", valor + this.totalPagWebServ);
-  console.log("detailPagesWebPresu dans component 'new-page2'", this.totalPagWebServ);
-  console.log("totalPreu dans component 'new-page2'", this.totalPreu);
-  //this.totalPreu = this.dataS.Service_calcTotalPreu()
-  console.log("this.detailPagesWebPresu  -  ",  this.totalPagWebServ);
+
   return this.totalPreu
 
 }
@@ -139,7 +135,7 @@ countChange(event:number) {
 
 // VALEUR pour afficher le total en bas de la div
 totalPresupuesto = ():number =>{
-  this.precioActualizado = this.retrieveDetailPageWeb + this.dataS.Service_calcTotalPreu();
+  this.precioActualizado = this.dataS.Service_calcTotalPreu();
   console.log("precioActualizado - ", this.precioActualizado);
   return this.precioActualizado
 

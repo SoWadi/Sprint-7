@@ -1,8 +1,9 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Budget } from './interfaces/interfacePresupuesto.interface';
+
 import { interfaceBudget } from './interfaces/servicePageWeb.interface';
+import { Budget } from './interfaces/monInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -160,11 +161,7 @@ Service_budgetName(val:string){
 Service_calcTotalPreu = ():number =>{
 
   this.varS_totalChexboxes = this.priceGAds + this.pricePagWeb + this.priceSeo;
-  console.log("Service_calcTotalPreu:", this.Service_calcTotalPreu, this.arrayPresus);
-  console.log("this.varS_totalChexboxes - ", this.varS_totalChexboxes);
-
-
-  return this.varS_totalChexboxes;
+  return this.varS_totalChexboxes + this.totalWebPages;
 }
 
 Service_createObjetBudget (){
@@ -173,7 +170,7 @@ Service_createObjetBudget (){
     GADS: this.priceGAds,
     Seo: this.priceSeo,
     //TODO: AJOUTER LES PAGES A L'OBJET AINSI QUE LES TOTAUX
-    Total: this.varS_totalChexboxes
+    Total: this.varS_totalChexboxes + this.totalWebPages
   }
 console.log("newBudget - ", newBudget);
 return newBudget
@@ -192,10 +189,22 @@ console.log("METODE get totalService dans dataService = this.Service_calcTotalPr
 get iscHecked () {
   return this.isPageWebCheck }
 
-  // -------------------------- TEST: console log des bool des checkboxes --------------------------
+//METHODE SERVICE POUR CRÉER NEW BUDGWRT LIST
+/* metodePadre_saveDetailBudget = () => {
+  this.dataS.saveDetailBudget();
+  this.dataS.arrayPresus;
+  let newBudget:Budget = {
+    PagesWeb: this.pricePagWeb,
+    GADS: this.priceGAds,
+    Seo: this.priceSeo,
+    Total: this.precioActualizado
+  };
 
 
-
+  this.budgetList.push(this.varNewBudget);
+  console.log("this.budgetList - ", this.budgetList);
 
 }
+ */
 
+}
